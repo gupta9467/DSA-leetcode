@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if (root == null)
+            return false;
+        return startSubPath(head, root)|| isSubPath(head, root.left) || isSubPath(head, root.right);
+    }
+    
+    private boolean startSubPath(ListNode head, TreeNode root) {
+        // check if a path from root equals the list
+        if (head == null)
+            return true;
+        if (root == null)
+            return false;
+        if (head.val == root.val) {
+            return startSubPath(head.next, root.left) || startSubPath(head.next, root.right);
+        }
+        else {
+            return false;
+        }
+    }
+}
