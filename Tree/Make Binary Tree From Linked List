@@ -1,0 +1,29 @@
+public static Tree convert(Node head, Tree root) {
+        // add code here.}
+        if(head==null)return null;
+       Queue<Tree>q=new LinkedList<>();
+       Node curr1=head;
+       Tree root1=new Tree(curr1.data);
+       curr1=curr1.next;
+       q.add(root1);
+       
+       while(curr1!=null)
+       {
+           Tree curr=q.poll();
+           if(curr1!=null)
+           {
+               curr.left=new Tree(curr1.data);
+               q.add(curr.left);
+               curr1=curr1.next;
+           }
+           if(curr1!=null)
+           {
+               curr.right=new Tree(curr1.data);
+               q.add(curr.right);
+               curr1=curr1.next;
+           }
+       }
+       
+       return root1;
+    }
+}  
