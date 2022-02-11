@@ -1,0 +1,41 @@
+/*class Solution {
+    int sum=0;
+    public TreeNode bstToGst(TreeNode root) {
+        inorder(root);
+        return root;
+    }
+    public void inorder(TreeNode root)
+    {
+        if(root==null)return;
+        inorder(root.right);
+        sum+=root.val;
+        root.val=sum;
+        inorder(root.left);
+    }
+}
+*/
+
+class Solution {
+    private void inorderTraversal(TreeNode node, ArrayList<TreeNode> list) {
+        if (node == null) return;
+        
+        inorderTraversal(node.left, list);
+        list.add(node);
+        inorderTraversal(node.right, list);
+    }
+
+    public TreeNode bstToGst(TreeNode root) {
+        ArrayList<TreeNode> list = new ArrayList<TreeNode>();
+        
+        inorderTraversal(root, list);
+        
+        int sum = 0;
+        for (int i = list.size() - 1; i >= 0; i--) {
+            TreeNode temp = list.get(i);
+            sum += temp.val;
+            temp.val = sum;
+        }
+        
+        return root;
+    }
+}
