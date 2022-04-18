@@ -1,0 +1,40 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int candidate1 = 0;
+        int candidate2 = 0;
+        int vote1 = 0;
+        int vote2 = 0;
+        for (int n: nums) {
+            if (candidate1 == n) 
+                vote1++;
+            else if (candidate2 == n)
+                vote2++;
+            else if (vote1 == 0) {
+                candidate1 = n;
+                vote1++;
+            }
+            else if (vote2 == 0) {
+                candidate2 = n;
+                vote2++;
+            } else {
+                vote1--;
+                vote2--;
+            }
+        }
+        
+        vote1 = 0; vote2 = 0;
+        for (int n: nums) {
+            if (candidate1 == n)
+                vote1++;
+            if (candidate2 == n)
+                vote2++;
+        }
+        
+        List<Integer> elements = new ArrayList<>();
+        if (vote1 > nums.length/3) 
+            elements.add(candidate1);
+        if (vote2 > nums.length/3 && candidate1 != candidate2) 
+            elements.add(candidate2);
+        return elements;
+    }
+}
